@@ -18,16 +18,38 @@ if(isset($_POST['username'], $_POST['password'], $_POST['email'], $_POST['passwo
             {
                 if(filter_var($email, FILTER_VALIDATE_EMAIL))
                 {
-                    $stat = $pdo->prepare('INSERT INTO users (`username`, `password`, `email`) VALUES (?,?,?)');
+                    $stat = $pdo->prepare('SELECT * FROM users WHERE username = ?');
                     $stat->execute([
-                            $username,
-                            password_hash($password, PASSWORD_DEFAULT, ['cost' => 11]),
-                            $email
+                        $username,
                     ]);
-
                     if($stat->rowCount())
                     {
-                        echo 'Thanks for registering, Please go to activate your account';
+                        die('Username is already taken, please pick up another one');
+                    }
+                    else
+                    {
+                        $stat = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+                        $stat->execute([
+                            $email
+                        ]);
+                        if($stat->rowCount())
+                        {
+                            die('Email is already taken, please pick up another one');
+                        }
+                        else
+                        {
+                            $stat = $pdo->prepare('INSERT INTO users (`username`, `password`, `email`) VALUES (?,?,?)');
+                            $stat->execute([
+                                    $username,
+                                    password_hash($password, PASSWORD_DEFAULT, ['cost' => 11]),
+                                    $email
+                            ]);
+        
+                            if($stat->rowCount())
+                            {
+                                echo 'Thanks for registering, Please go to activate your account';
+                            }
+                        }
                     }
                 }
                 else
