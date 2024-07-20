@@ -1,3 +1,11 @@
+<?php
+  require_once '../Views/navbar.php';
+  // session_start();
+  if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true)
+  {
+    header('refresh:0.5;url=../Views/navbar.php');
+  }
+?>
 <form class="form-horizontal" action="../Control/password_reset.php" method="POST">
     
     <!-- Form Name -->
@@ -15,7 +23,7 @@
     
     <!-- Button -->
     <div class="form-group">
-      <div class="col-md-4">
+      <div class="col-md-9 col-md-offset-4">
         <button id="submit" name="submit" class="btn btn-default">Generate Password</button>
       </div>
     </div>

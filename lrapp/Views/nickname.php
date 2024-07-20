@@ -1,3 +1,6 @@
+<?php
+require_once '../Views/navbar.php'
+?>
 <form class="form-horizontal" action="../Control/nickname.php" method="POST">
     
     <!-- Form Name -->

@@ -1,6 +1,7 @@
 <?php
 
 require_once '../Inc/connection.php';
+// require_once '../Views/navbar.php';
 
 if(isset($_GET['email'],$_GET['reset_token']) && !empty($_GET['reset_token']) && !empty($_GET['email']))
 {

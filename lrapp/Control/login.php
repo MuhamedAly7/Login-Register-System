@@ -32,6 +32,8 @@ if(isset($_POST['username'], $_POST['password']))
                             $_SESSION['username'] = $value['username'];
                             $_SESSION['email']    = $value['email'];
                             $_SESSION['id']       = $value['id'];
+                            $_SESSION['nickname'] = ($value['nickname'] === NULL) ? $_SESSION['username'] : $value['nickname'];
+                            $_SESSION['privil']   = $value['privil'];
                             $stat = $pdo->prepare('UPDATE users SET last_login=:last_login WHERE username=:username');
                             $stat->execute([
                                 ':last_login' => date('Y-m-d H:i'),

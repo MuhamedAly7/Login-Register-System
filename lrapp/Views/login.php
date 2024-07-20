@@ -1,8 +1,14 @@
+<?php
+  require_once '../Views/navbar.php';
+  // session_start();
+  if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true)
+  {
+    header('refresh:0.5;url=../Views/navbar.php');
+  }
+?>
+
 <form class="form-horizontal" action="../Control/login.php" method="POST">
     
-  <!-- Form Name -->
-  <!-- <legend>Form Name</legend> -->
-  
   <!-- Text input-->
   <div class="form-group">
     <label class="col-md-4 control-label" for="username">Username</label>  
@@ -26,7 +32,7 @@
     <label class="col-md-4 control-label" for="submit">Login Button</label>
     <div class="col-md-4">
       <button id="submit" name="submit" class="btn btn-default">Login</button><br>
-      <small><a href="password_reset.html">Forget Password?</a></small>
+      <small><a href="./password_reset.php">Forget Password?</a></small>
     </div>
   </div>
     
