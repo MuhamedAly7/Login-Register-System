@@ -27,12 +27,12 @@ if(isset($_POST['username'], $_POST['password']))
                         // print_r($value);
                         if(password_verify($password, $value['password']))
                         {
-                            echo 'Welcome User';
+                            // echo 'Welcome User';
                             $_SESSION['loggedin'] = true;
                             $_SESSION['username'] = $value['username'];
                             $_SESSION['email']    = $value['email'];
                             $_SESSION['id']       = $value['id'];
-                            $_SESSION['nickname'] = ($value['nickname'] === NULL) ? $_SESSION['username'] : $value['nickname'];
+                            $_SESSION['nickname'] = $value['nickname'] ?? $value['username'];
                             $_SESSION['privil']   = $value['privil'];
                             $stat = $pdo->prepare('UPDATE users SET last_login=:last_login WHERE username=:username');
                             $stat->execute([
@@ -40,6 +40,7 @@ if(isset($_POST['username'], $_POST['password']))
                                 ':username'   => $_SESSION['username']
                             ]);
                             
+                            header('refresh:0;url=../Control/index.php');
                         }
                         else
                         {

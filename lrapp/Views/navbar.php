@@ -53,7 +53,7 @@
                         case $_SESSION['privil'] === 1:
                             ?>
                             <li><a href="../Views/create.php">Create A Post</a></li>
-                            <li><a href="../Views/create.php">List Newest Posts</a></li>
+                            <li><a href="../Control/index.php">List Newest Posts</a></li>
                             <?php
                             break;
                         default:
